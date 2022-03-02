@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from "react";
 
 export default function Order(props) {
-  const { orderItems, onAdd, onRemove, onConfirmOrder } = props;
+  const { orderItems, onAdd, onRemove, onConfirmOrder, count } = props;
   const itemsPrice = orderItems.reduce((accumulator, curetItem) => accumulator + curetItem.price * curetItem.qty, 0)
   const vat = itemsPrice * 0.05;
   const totalPrice = itemsPrice + vat;
@@ -41,8 +41,8 @@ export default function Order(props) {
             </div>
           </div>
           <hr />
-          <div className="row">
-            <button onClick={() => onConfirmOrder(totalPrice)}>
+          <div className="row" value={count}>
+            <button onClick={() => onConfirmOrder(totalPrice, count)}>
               Confirm Order
             </button>
           </div>

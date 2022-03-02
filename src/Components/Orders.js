@@ -9,7 +9,7 @@ export default function Orders(props) {
       <div>{orders.length === 0 && <div>No Pending Orders</div>}</div>
       {orders.map((item) => (<div key={item.id} className="row">
         <div className="column 2">{item.id}</div>
-        <div className="column 2 text-right">
+        <div className="column 2">
            £{item.total.toFixed(2)}
         </div>
       </div>

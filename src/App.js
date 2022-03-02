@@ -18,6 +18,7 @@ export default function App() {
   // hook to implement state 
   const [orderItems, setOrderItems] = useState(cartFromLocalStorage);
   const [orders, setOrders] = useState(ordersFromLocalStorage);
+  const [count, setCount] = useState(1);
 
   //local storage
   useEffect(() => {
@@ -56,15 +57,17 @@ export default function App() {
       );
     }
   }
-  const onConfirmOrder = (total) => {
-    const exists = orders.find((x) => x.id === orders.id);
-    if (exists) {
+  const onConfirmOrder = (total, count) => {
+    setCount([count + 1])
+    //const exists = orders.find((x) => x.id === toString(num).id);
+    if (orders.lenth) {
       orders.map(x =>
-        x.id === orders.id ? { ...orders, id: orders.id + 1, total } : x
+        x.id === orders.id ? { ...orders, id: count, total } : x
       )
+      setOrderItems([])
     }
     else {
-      setOrders([...orders, { ...orders, id: 1, total }])
+      setOrders([...orders, { ...orders, id: count, total }])
       setOrderItems([])
     }
   }
@@ -79,6 +82,7 @@ export default function App() {
             onRemove={onRemove}
             onConfirmOrder={onConfirmOrder}
             orderItems={orderItems}
+            count={count}
 
           ></Order>
         </div>
@@ -88,4 +92,5 @@ export default function App() {
     </>
 
   );
+  
 }
